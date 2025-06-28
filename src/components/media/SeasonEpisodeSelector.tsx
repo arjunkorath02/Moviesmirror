@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, Play, Clock } from 'lucide-react';
+import { ChevronDown, Play, Clock, Calendar, Star } from 'lucide-react';
 import { Season, Episode } from '../../types';
 
 interface SeasonEpisodeSelectorProps {
@@ -51,75 +51,109 @@ const SeasonEpisodeSelector = ({
     onSelect(selectedSeason, episodeNumber);
   };
 
-  // Format time (minutes to HH:MM format)
-  const formatDuration = (minutes?: number) => {
-    if (!minutes) return 'N/A';
-    const hours = Math.floor(minutes / 60);
-    const mins = minutes % 60;
-    return hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
-  };
-
   return (
-    <div className="bg-background-card rounded-lg p-4 mb-8">
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-6">
-        <h3 className="text-xl font-bold mb-2 md:mb-0">Episodes</h3>
+    <motion.div 
+      className="liquid-glass-card rounded-3xl p-8 mb-8"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      {/* Header */}
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-between mb-8">
+        <motion.h3 
+          className="text-3xl font-bold mb-4 md:mb-0 sf-pro-display text-white"
+          initial={{ opacity: 0, x: -20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          Episodes
+        </motion.h3>
         
-        {/* Season Selector Dropdown */}
-        <div className="relative">
+        {/* Season Selector */}
+        <motion.div 
+          className="relative"
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+        >
           <button
             onClick={() => setIsSeasonDropdownOpen(!isSeasonDropdownOpen)}
-            className="flex items-center justify-between bg-background-hover hover:bg-background-card border border-gray-700 rounded-md px-4 py-2 min-w-[160px] transition-colors"
+            className="flex items-center justify-between liquid-glass rounded-2xl px-6 py-3 min-w-[180px] apple-hover text-white font-semibold sf-pro-text"
           >
             <span>Season {selectedSeason}</span>
-            <ChevronDown className={`w-4 h-4 ml-2 transition-transform duration-300 ${isSeasonDropdownOpen ? 'rotate-180' : ''}`} />
+            <ChevronDown className={`w-5 h-5 ml-3 transition-transform duration-300 ${isSeasonDropdownOpen ? 'rotate-180' : ''}`} />
           </button>
           
           <AnimatePresence>
             {isSeasonDropdownOpen && (
               <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -10 }}
-                className="absolute right-0 mt-2 w-full bg-background-card border border-gray-700 rounded-md shadow-lg z-10 max-h-60 overflow-y-auto"
+                initial={{ opacity: 0, y: -10, scale: 0.95 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -10, scale: 0.95 }}
+                transition={{ duration: 0.2, ease: [0.25, 0.46, 0.45, 0.94] }}
+                className="absolute right-0 mt-2 w-full liquid-glass-strong rounded-2xl shadow-2xl z-20 max-h-60 overflow-y-auto"
               >
-                <ul>
+                <div className="p-2">
                   {seasons.map(season => (
-                    <li key={season.id}>
-                      <button
-                        onClick={() => handleSeasonSelect(season.season_number)}
-                        className={`w-full text-left px-4 py-2 hover:bg-background-hover transition-colors ${
-                          selectedSeason === season.season_number ? 'bg-primary/20 text-primary' : ''
-                        }`}
-                      >
-                        Season {season.season_number}
-                      </button>
-                    </li>
+                    <motion.button
+                      key={season.id}
+                      onClick={() => handleSeasonSelect(season.season_number)}
+                      className={`w-full text-left px-4 py-3 rounded-xl transition-all duration-300 sf-pro-text font-medium ${
+                        selectedSeason === season.season_number 
+                          ? 'bg-blue-500/20 text-blue-400 border border-blue-500/30' 
+                          : 'text-white/80 hover:bg-white/10 hover:text-white'
+                      }`}
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
+                    >
+                      Season {season.season_number}
+                      {season.episode_count && (
+                        <span className="text-xs text-white/50 ml-2">
+                          ({season.episode_count} episodes)
+                        </span>
+                      )}
+                    </motion.button>
                   ))}
-                </ul>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
+        </motion.div>
       </div>
       
-      {/* Episodes List */}
+      {/* Episodes Grid */}
       <div className="space-y-4">
         {currentSeason?.episodes ? (
-          currentSeason.episodes.map(episode => (
-            <EpisodeItem
-              key={episode.id}
-              episode={episode}
-              isSelected={selectedEpisode === episode.episode_number}
-              onSelect={handleEpisodeSelect}
-            />
-          ))
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="grid gap-4"
+          >
+            {currentSeason.episodes.map((episode, index) => (
+              <EpisodeItem
+                key={episode.id}
+                episode={episode}
+                isSelected={selectedEpisode === episode.episode_number}
+                onSelect={handleEpisodeSelect}
+                index={index}
+              />
+            ))}
+          </motion.div>
         ) : (
-          <div className="text-center py-10 text-text-secondary">
-            <p>No episodes found for this season.</p>
-          </div>
+          <motion.div 
+            className="text-center py-16"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            <div className="liquid-glass rounded-3xl p-8">
+              <p className="text-white/60 sf-pro-text text-lg">No episodes found for this season.</p>
+            </div>
+          </motion.div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -127,71 +161,144 @@ interface EpisodeItemProps {
   episode: Episode;
   isSelected: boolean;
   onSelect: (episodeNumber: number) => void;
+  index: number;
 }
 
-const EpisodeItem = ({ episode, isSelected, onSelect }: EpisodeItemProps) => {
+const EpisodeItem = ({ episode, isSelected, onSelect, index }: EpisodeItemProps) => {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <motion.div
-      whileHover={{ scale: 1.01 }}
-      className={`flex flex-col sm:flex-row gap-4 p-3 rounded-lg transition-colors ${
-        isSelected ? 'bg-primary/20 border border-primary/30' : 'bg-background-hover hover:bg-background-card'
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{ scale: 1.02 }}
+      className={`relative overflow-hidden rounded-2xl transition-all duration-500 ${
+        isSelected 
+          ? 'liquid-glass-strong border border-blue-500/30 shadow-2xl' 
+          : 'liquid-glass apple-hover'
       }`}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Episode Image */}
-      <div className="relative sm:w-48 aspect-video rounded-md overflow-hidden flex-shrink-0">
-        <img
-          src={episode.still_path ? `https://image.tmdb.org/t/p/w300${episode.still_path}` : 'https://via.placeholder.com/300x170/121212/ffffff?text=No+Image'}
-          alt={episode.name}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent">
-          <div className="absolute bottom-2 left-2 text-white">
-            <span className="text-sm font-semibold">Ep {episode.episode_number}</span>
+      <div className="flex flex-col lg:flex-row gap-6 p-6">
+        {/* Episode Thumbnail */}
+        <div className="relative lg:w-80 aspect-video rounded-xl overflow-hidden flex-shrink-0 group">
+          <img
+            src={episode.still_path 
+              ? `https://image.tmdb.org/t/p/w500${episode.still_path}` 
+              : 'https://via.placeholder.com/500x280/1C1C1E/ffffff?text=No+Image'
+            }
+            alt={episode.name}
+            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          />
+          
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent">
+            {/* Episode Number Badge */}
+            <div className="absolute top-3 left-3">
+              <div className="liquid-glass-strong rounded-xl px-3 py-1.5">
+                <span className="text-white font-bold sf-pro-text text-sm">
+                  Episode {episode.episode_number}
+                </span>
+              </div>
+            </div>
+            
+            {/* Runtime Badge */}
+            {episode.runtime && (
+              <div className="absolute top-3 right-3">
+                <div className="liquid-glass-strong rounded-xl px-3 py-1.5 flex items-center">
+                  <Clock className="w-3 h-3 mr-1.5 text-white/70" />
+                  <span className="text-white/90 text-xs font-medium sf-pro-text">
+                    {episode.runtime}m
+                  </span>
+                </div>
+              </div>
+            )}
           </div>
+          
+          {/* Play Button Overlay */}
+          <AnimatePresence>
+            {(isHovered || isSelected) && (
+              <motion.button
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.8 }}
+                transition={{ duration: 0.3 }}
+                onClick={() => onSelect(episode.episode_number)}
+                className="absolute inset-0 flex items-center justify-center"
+              >
+                <div className="liquid-glass-strong rounded-full p-4 apple-hover">
+                  <Play className="w-8 h-8 text-white fill-white" />
+                </div>
+              </motion.button>
+            )}
+          </AnimatePresence>
         </div>
         
-        {/* Play Button Overlay */}
-        <button
-          onClick={() => onSelect(episode.episode_number)}
-          className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity duration-300"
-        >
-          <div className="bg-primary/80 rounded-full p-3">
-            <Play className="w-5 h-5 text-white fill-white" />
+        {/* Episode Info */}
+        <div className="flex-grow space-y-4">
+          {/* Title and Air Date */}
+          <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+            <h4 className="text-xl font-bold text-white sf-pro-display line-clamp-2">
+              {episode.name}
+            </h4>
+            {episode.air_date && (
+              <div className="flex items-center liquid-glass rounded-xl px-3 py-1.5 flex-shrink-0">
+                <Calendar className="w-3 h-3 mr-1.5 text-white/70" />
+                <span className="text-white/90 text-xs font-medium sf-pro-text">
+                  {new Date(episode.air_date).toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric'
+                  })}
+                </span>
+              </div>
+            )}
           </div>
-        </button>
+          
+          {/* Description */}
+          <p className="text-white/80 sf-pro-text leading-relaxed line-clamp-3 lg:line-clamp-4">
+            {episode.overview || 'No description available for this episode.'}
+          </p>
+          
+          {/* Action Button */}
+          <div className="flex items-center justify-between pt-2">
+            <div className="flex items-center space-x-3">
+              {/* Episode Rating (if available) */}
+              <div className="flex items-center liquid-glass rounded-xl px-3 py-1.5">
+                <Star className="w-3 h-3 mr-1.5 text-yellow-400 fill-yellow-400" />
+                <span className="text-white/90 text-xs font-medium sf-pro-text">
+                  {episode.vote_average ? episode.vote_average.toFixed(1) : 'N/A'}
+                </span>
+              </div>
+            </div>
+            
+            <motion.button
+              onClick={() => onSelect(episode.episode_number)}
+              className={`px-6 py-2.5 text-sm font-semibold rounded-xl transition-all duration-300 sf-pro-text ${
+                isSelected 
+                  ? 'bg-blue-500 text-white shadow-lg shadow-blue-500/25' 
+                  : 'liquid-glass text-white/90 hover:bg-blue-500/20 hover:text-blue-400 apple-hover'
+              }`}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {isSelected ? 'Currently Selected' : 'Watch Episode'}
+            </motion.button>
+          </div>
+        </div>
       </div>
       
-      {/* Episode Info */}
-      <div className="flex-grow">
-        <div className="flex items-start justify-between">
-          <h4 className="font-semibold">{episode.name}</h4>
-          <div className="flex items-center text-text-secondary text-sm">
-            <Clock className="w-3 h-3 mr-1" />
-            <span>{episode.runtime ? `${episode.runtime}m` : 'N/A'}</span>
-          </div>
-        </div>
-        
-        <p className="text-text-secondary text-sm mt-2 line-clamp-2 sm:line-clamp-3">
-          {episode.overview || 'No description available.'}
-        </p>
-        
-        <div className="mt-3 flex justify-between items-center">
-          <span className="text-xs text-text-muted">
-            {episode.air_date ? new Date(episode.air_date).toLocaleDateString() : 'No air date'}
-          </span>
-          
-          <button
-            onClick={() => onSelect(episode.episode_number)}
-            className={`px-3 py-1 text-xs font-medium rounded transition-colors ${
-              isSelected 
-                ? 'bg-primary text-white' 
-                : 'bg-background-card hover:bg-primary/80 text-text-primary hover:text-white'
-            }`}
-          >
-            {isSelected ? 'Currently Selected' : 'Watch Episode'}
-          </button>
-        </div>
-      </div>
+      {/* Selected Indicator */}
+      {isSelected && (
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 to-cyan-400"
+          style={{ transformOrigin: 'left' }}
+        />
+      )}
     </motion.div>
   );
 };
