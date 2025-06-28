@@ -51,12 +51,12 @@ const RegisterPage = () => {
   };
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background-card bg-gradient-to-b from-background to-background-card py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-b from-background via-background-card to-background py-12 px-4">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="max-w-md w-full space-y-8 bg-background-card p-8 rounded-xl shadow-xl border border-gray-800"
+        className="max-w-md w-full liquid-glass-card p-8 rounded-2xl"
       >
         <div className="text-center">
           <Link to="/" className="flex justify-center items-center mb-6">
@@ -65,8 +65,8 @@ const RegisterPage = () => {
               MoviesMirror
             </span>
           </Link>
-          <h2 className="text-2xl font-bold">Create Your Account</h2>
-          <p className="mt-2 text-sm text-text-secondary">
+          <h2 className="text-2xl font-bold text-white sf-pro-display">Create Your Account</h2>
+          <p className="mt-2 text-sm text-white/70 sf-pro-text">
             Join MoviesMirror to watch thousands of movies & TV shows
           </p>
         </div>
@@ -74,20 +74,20 @@ const RegisterPage = () => {
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {/* Error Message */}
           {error && (
-            <div className="bg-error/10 border border-error/30 rounded-md p-3 flex items-start">
-              <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mr-2 mt-0.5" />
-              <span className="text-sm text-error">{error}</span>
+            <div className="liquid-glass border border-red-500/30 rounded-xl p-3 flex items-start">
+              <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mr-2 mt-0.5" />
+              <span className="text-sm text-red-400">{error}</span>
             </div>
           )}
           
           {/* Name Field */}
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-text-secondary mb-1">
+            <label htmlFor="name" className="block text-sm font-medium text-white/80 mb-1 sf-pro-text">
               Full Name
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <User className="h-5 w-5 text-text-muted" />
+                <User className="h-5 w-5 text-white/50" />
               </div>
               <input
                 id="name"
@@ -97,7 +97,7 @@ const RegisterPage = () => {
                 required
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="appearance-none relative block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md bg-background-hover placeholder-text-muted text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50"
+                className="appearance-none block w-full pl-10 pr-3 py-2.5 liquid-glass rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 sf-pro-text"
                 placeholder="Enter your full name"
               />
             </div>
@@ -105,12 +105,12 @@ const RegisterPage = () => {
           
           {/* Email Field */}
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-text-secondary mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-1 sf-pro-text">
               Email Address
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-text-muted" />
+                <Mail className="h-5 w-5 text-white/50" />
               </div>
               <input
                 id="email"
@@ -120,7 +120,7 @@ const RegisterPage = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none relative block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md bg-background-hover placeholder-text-muted text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50"
+                className="appearance-none block w-full pl-10 pr-3 py-2.5 liquid-glass rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 sf-pro-text"
                 placeholder="Enter your email"
               />
             </div>
@@ -128,12 +128,12 @@ const RegisterPage = () => {
           
           {/* Password Field */}
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-text-secondary mb-1">
+            <label htmlFor="password" className="block text-sm font-medium text-white/80 mb-1 sf-pro-text">
               Password
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Lock className="h-5 w-5 text-text-muted" />
+                <Lock className="h-5 w-5 text-white/50" />
               </div>
               <input
                 id="password"
@@ -143,14 +143,14 @@ const RegisterPage = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none relative block w-full pl-10 pr-10 py-2 border border-gray-700 rounded-md bg-background-hover placeholder-text-muted text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50"
+                className="appearance-none block w-full pl-10 pr-10 py-2.5 liquid-glass rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 sf-pro-text"
                 placeholder="Create a password"
               />
               <div className="absolute inset-y-0 right-0 pr-3 flex items-center">
                 <button
                   type="button"
                   onClick={togglePasswordVisibility}
-                  className="text-text-muted hover:text-text-secondary focus:outline-none transition-colors"
+                  className="text-white/50 hover:text-white/70 focus:outline-none transition-colors"
                 >
                   {showPassword ? (
                     <EyeOff className="h-5 w-5" />
@@ -164,12 +164,12 @@ const RegisterPage = () => {
           
           {/* Confirm Password Field */}
           <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium text-text-secondary mb-1">
+            <label htmlFor="confirmPassword" className="block text-sm font-medium text-white/80 mb-1 sf-pro-text">
               Confirm Password
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Lock className="h-5 w-5 text-text-muted" />
+                <Lock className="h-5 w-5 text-white/50" />
               </div>
               <input
                 id="confirmPassword"
@@ -179,7 +179,7 @@ const RegisterPage = () => {
                 required
                 value={confirmPassword}
                 onChange={(e) => setConfirmPassword(e.target.value)}
-                className="appearance-none relative block w-full pl-10 pr-3 py-2 border border-gray-700 rounded-md bg-background-hover placeholder-text-muted text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary/50"
+                className="appearance-none block w-full pl-10 pr-3 py-2.5 liquid-glass rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 sf-pro-text"
                 placeholder="Confirm your password"
               />
             </div>
@@ -193,17 +193,17 @@ const RegisterPage = () => {
                 name="terms"
                 type="checkbox"
                 required
-                className="h-4 w-4 text-primary border-gray-700 rounded bg-background-hover focus:ring-primary/50"
+                className="h-4 w-4 text-blue-500 liquid-glass rounded focus:ring-blue-500/50"
               />
             </div>
             <div className="ml-3">
-              <label htmlFor="terms" className="text-xs text-text-secondary">
+              <label htmlFor="terms" className="text-xs text-white/70 sf-pro-text">
                 I agree to the{' '}
-                <Link to="/terms" className="text-primary hover:text-primary/80 transition-colors">
+                <Link to="/terms" className="text-blue-400 hover:text-blue-300 transition-colors">
                   Terms of Service
                 </Link>{' '}
                 and{' '}
-                <Link to="/privacy" className="text-primary hover:text-primary/80 transition-colors">
+                <Link to="/privacy" className="text-blue-400 hover:text-blue-300 transition-colors">
                   Privacy Policy
                 </Link>
               </label>
@@ -215,7 +215,7 @@ const RegisterPage = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors ${
+              className={`w-full btn-primary py-2.5 sf-pro-text font-semibold ${
                 isLoading ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >
@@ -225,9 +225,9 @@ const RegisterPage = () => {
           
           {/* Login Link */}
           <div className="text-center mt-4">
-            <p className="text-sm text-text-secondary">
+            <p className="text-sm text-white/70 sf-pro-text">
               Already have an account?{' '}
-              <Link to="/login" className="font-medium text-primary hover:text-primary/80 transition-colors">
+              <Link to="/login" className="font-medium text-blue-400 hover:text-blue-300 transition-colors">
                 Sign in
               </Link>
             </p>

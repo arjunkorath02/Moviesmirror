@@ -42,7 +42,7 @@ const LoginPage = () => {
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-        className="max-w-md w-full glass-effect p-8 rounded-2xl"
+        className="max-w-md w-full liquid-glass-card p-8 rounded-2xl"
       >
         <div className="text-center">
           <Link to="/" className="flex justify-center items-center mb-6">
@@ -51,27 +51,27 @@ const LoginPage = () => {
               MoviesMirror
             </span>
           </Link>
-          <h2 className="text-2xl font-bold">Welcome Back</h2>
-          <p className="mt-2 text-sm text-text-secondary">
+          <h2 className="text-2xl font-bold text-white sf-pro-display">Welcome Back</h2>
+          <p className="mt-2 text-sm text-white/70 sf-pro-text">
             Sign in to continue to MoviesMirror
           </p>
         </div>
         
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="bg-error/10 border border-error/30 rounded-xl p-3 flex items-start">
-              <AlertCircle className="w-5 h-5 text-error flex-shrink-0 mr-2 mt-0.5" />
-              <span className="text-sm text-error">{error}</span>
+            <div className="liquid-glass border border-red-500/30 rounded-xl p-3 flex items-start">
+              <AlertCircle className="w-5 h-5 text-red-400 flex-shrink-0 mr-2 mt-0.5" />
+              <span className="text-sm text-red-400">{error}</span>
             </div>
           )}
           
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-text-secondary mb-1">
+            <label htmlFor="email" className="block text-sm font-medium text-white/80 mb-1 sf-pro-text">
               Email Address
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Mail className="h-5 w-5 text-text-muted" />
+                <Mail className="h-5 w-5 text-white/50" />
               </div>
               <input
                 id="email"
@@ -81,19 +81,19 @@ const LoginPage = () => {
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="appearance-none block w-full pl-10 pr-3 py-2.5 glass-effect rounded-xl text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/50"
+                className="appearance-none block w-full pl-10 pr-3 py-2.5 liquid-glass rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 sf-pro-text"
                 placeholder="Enter your email"
               />
             </div>
           </div>
           
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-text-secondary mb-1">
+            <label htmlFor="password" className="block text-sm font-medium text-white/80 mb-1 sf-pro-text">
               Password
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <Lock className="h-5 w-5 text-text-muted" />
+                <Lock className="h-5 w-5 text-white/50" />
               </div>
               <input
                 id="password"
@@ -103,13 +103,13 @@ const LoginPage = () => {
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="appearance-none block w-full pl-10 pr-10 py-2.5 glass-effect rounded-xl text-text-primary focus:outline-none focus:ring-2 focus:ring-primary/50"
+                className="appearance-none block w-full pl-10 pr-10 py-2.5 liquid-glass rounded-xl text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-blue-500/50 sf-pro-text"
                 placeholder="Enter your password"
               />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-text-muted hover:text-text-secondary focus:outline-none transition-colors"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-white/50 hover:text-white/70 focus:outline-none transition-colors"
               >
                 {showPassword ? (
                   <EyeOff className="h-5 w-5" />
@@ -126,14 +126,14 @@ const LoginPage = () => {
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="h-4 w-4 text-primary glass-effect rounded focus:ring-primary/50"
+                className="h-4 w-4 text-blue-500 liquid-glass rounded focus:ring-blue-500/50"
               />
-              <label htmlFor="remember-me" className="ml-2 block text-sm text-text-secondary">
+              <label htmlFor="remember-me" className="ml-2 block text-sm text-white/70 sf-pro-text">
                 Remember me
               </label>
             </div>
             
-            <Link to="/forgot-password" className="text-sm font-medium text-primary hover:text-primary/80 transition-colors">
+            <Link to="/forgot-password" className="text-sm font-medium text-blue-400 hover:text-blue-300 transition-colors sf-pro-text">
               Forgot password?
             </Link>
           </div>
@@ -141,16 +141,16 @@ const LoginPage = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full btn-primary py-2.5 ${
+            className={`w-full btn-primary py-2.5 sf-pro-text font-semibold ${
               isLoading ? 'opacity-70 cursor-not-allowed' : ''
             }`}
           >
             {isLoading ? 'Signing in...' : 'Sign In'}
           </button>
           
-          <p className="text-center text-sm text-text-secondary">
+          <p className="text-center text-sm text-white/70 sf-pro-text">
             Don't have an account?{' '}
-            <Link to="/register" className="font-medium text-primary hover:text-primary/80 transition-colors">
+            <Link to="/register" className="font-medium text-blue-400 hover:text-blue-300 transition-colors">
               Sign up
             </Link>
           </p>
