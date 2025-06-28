@@ -19,7 +19,9 @@ export default {
           primary: '#FFFFFF',
           secondary: '#86868B',
           muted: '#48484A',
-        }
+        },
+        foreground: '#FFFFFF',
+        'muted-foreground': '#86868B',
       },
       fontFamily: {
         'sf-pro-display': ['SF Pro Display', '-apple-system', 'BlinkMacSystemFont', 'system-ui', 'sans-serif'],
@@ -38,6 +40,8 @@ export default {
         'xl': '1rem',
         '2xl': '1.25rem',
         '3xl': '1.5rem',
+        '4xl': '2rem',
+        '6xl': '3rem',
       },
       backdropBlur: {
         'xs': '2px',
