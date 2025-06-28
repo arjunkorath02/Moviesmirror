@@ -22,7 +22,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      // Reduced threshold from 20 to 10 pixels for faster response
+      setIsScrolled(window.scrollY > 10);
     };
     
     window.addEventListener('scroll', handleScroll);
@@ -48,7 +49,7 @@ const Navbar = () => {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-out ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-out ${
         isScrolled 
           ? 'glass-navbar py-3 shadow-2xl' 
           : 'bg-gradient-to-b from-black/60 via-black/30 to-transparent py-6'
