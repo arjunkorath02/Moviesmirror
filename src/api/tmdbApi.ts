@@ -42,6 +42,22 @@ export const getLatestMovies = async (page: number = 1) => {
   return response.data;
 };
 
+// Latest Indian movies
+export const getLatestIndianMovies = async (page: number = 1) => {
+  const response = await api.get('/discover/movie', {
+    params: {
+      page,
+      with_original_language: 'hi|ta|te|ml|kn|bn|gu|mr|pa', // Hindi, Tamil, Telugu, Malayalam, Kannada, Bengali, Gujarati, Marathi, Punjabi
+      sort_by: 'release_date.desc',
+      'release_date.lte': new Date().toISOString().split('T')[0], // Released movies only
+      'release_date.gte': new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString().split('T')[0], // Last year
+      with_release_type: '2|3', // Theatrical releases
+      region: 'IN', // India region
+    },
+  });
+  return response.data;
+};
+
 // Popular TV shows
 export const getPopularTVShows = async (page: number = 1) => {
   const response = await api.get('/tv/popular', { params: { page } });
@@ -103,6 +119,7 @@ export default {
   getPopularMovies,
   getTopRatedMovies,
   getLatestMovies,
+  getLatestIndianMovies,
   getPopularTVShows,
   getTopRatedTVShows,
   getLatestTVShows,

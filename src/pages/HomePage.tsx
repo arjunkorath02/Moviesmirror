@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import MediaGrid from '../components/Shared/MediaGrid';
 import HeroCarousel from '../components/Shared/HeroCarousel';
 import LoadingScreen from '../components/Shared/LoadingScreen';
-import { getTrending, getLatestMovies, getLatestTVShows, getPopularMovies, getTopRatedMovies, getTopRatedTVShows } from '../api/tmdbApi';
+import { getTrending, getLatestMovies, getLatestTVShows, getPopularMovies, getTopRatedMovies, getTopRatedTVShows, getLatestIndianMovies } from '../api/tmdbApi';
 import { MediaItem } from '../types';
 
 const HomePage = () => {
@@ -37,6 +37,12 @@ const HomePage = () => {
     'latestTVShows', 
     () => getLatestTVShows()
   );
+
+  // Fetch latest Indian movies
+  const { data: latestIndianMoviesData, isLoading: isLatestIndianMoviesLoading } = useQuery(
+    'latestIndianMovies', 
+    () => getLatestIndianMovies()
+  );
   
   // Show loading screen if hero data is loading
   if (isTrendingLoading) {
@@ -68,6 +74,20 @@ const HomePage = () => {
             title="🔥 Trending This Week" 
             items={trendingData || []} 
             isLoading={isTrendingLoading} 
+          />
+        </motion.div>
+
+        {/* Latest Indian Movies Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <MediaGrid 
+            title="🇮🇳 Latest Indian Movies" 
+            items={(latestIndianMoviesData?.results || []).map(item => ({ ...item, media_type: 'movie' }))} 
+            isLoading={isLatestIndianMoviesLoading}
+            emptyMessage="No Indian movies found at the moment."
           />
         </motion.div>
         
