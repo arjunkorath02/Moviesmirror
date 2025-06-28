@@ -3,8 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 import { motion } from 'framer-motion';
 import { getMovieDetails } from '../api/tmdbApi';
-import MediaDetails from '../components/Media/Mediadetails';
-import VideoPlayer from '../components/Media/VideoPlayer';
+import MediaDetails from '../components/media/Mediadetails';
+import VideoPlayer from '../components/media/VideoPlayer';
 import MediaGrid from '../components/Shared/MediaGrid';
 import LoadingScreen from '../components/Shared/LoadingScreen';
 
