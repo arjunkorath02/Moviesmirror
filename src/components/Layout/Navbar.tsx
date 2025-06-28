@@ -64,10 +64,12 @@ const Navbar = () => {
         >
           <Link to="/" className="flex items-center">
             <div className="relative">
-              <Film className="w-8 h-8 text-white" fill="currentColor" />
+              <Film className="w-8 h-8 text-blue-400" strokeWidth={2} />
               <div className="absolute inset-0 w-8 h-8 bg-blue-500/20 rounded-full blur-lg"></div>
             </div>
-            <span className="ml-3 text-2xl font-bold text-gradient sf-pro-display">MoviesMirror</span>
+            <span className="ml-3 text-2xl font-bold sf-pro-display bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              MoviesMirror
+            </span>
           </Link>
         </motion.div>
 

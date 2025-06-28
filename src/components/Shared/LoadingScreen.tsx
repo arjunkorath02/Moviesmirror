@@ -23,7 +23,7 @@ const LoadingScreen = () => {
           }}
         >
           <div className="liquid-glass-strong rounded-full p-6">
-            <Film className="w-16 h-16 text-gradient" />
+            <Film className="w-16 h-16 text-blue-400" strokeWidth={2} />
           </div>
           <div className="absolute inset-0 w-full h-full bg-blue-500/20 rounded-full blur-2xl animate-pulse"></div>
         </motion.div>
@@ -32,7 +32,7 @@ const LoadingScreen = () => {
         <motion.h2
           animate={{ opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="text-2xl font-bold text-gradient mb-8 sf-pro-display"
+          className="text-2xl font-bold mb-8 sf-pro-display bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent"
         >
           MoviesMirror
         </motion.h2>

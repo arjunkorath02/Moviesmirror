@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Film, Mail, Lock, User, EyeOff, Eye, AlertCircle } from 'lucide-react';
-import { useAuth } from '../hooks/useAuth';
+import { useAuth } from '../hooks/UseAuth';
 
 const RegisterPage = () => {
   const { register } = useAuth();
@@ -60,8 +60,10 @@ const RegisterPage = () => {
       >
         <div className="text-center">
           <Link to="/" className="flex justify-center items-center mb-6">
-            <Film className="w-8 h-8 text-primary" />
-            <span className="ml-2 text-2xl font-bold text-gradient">MoviesMirror</span>
+            <Film className="w-8 h-8 text-blue-400" strokeWidth={2} />
+            <span className="ml-2 text-2xl font-bold sf-pro-display bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-500 bg-clip-text text-transparent">
+              MoviesMirror
+            </span>
           </Link>
           <h2 className="text-2xl font-bold">Create Your Account</h2>
           <p className="mt-2 text-sm text-text-secondary">
