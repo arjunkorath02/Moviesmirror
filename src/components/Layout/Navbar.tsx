@@ -43,8 +43,7 @@ const Navbar = () => {
   };
 
   const handleProfileClick = () => {
-    // For now, just show an alert since profile page doesn't exist
-    alert('Profile page coming soon!');
+    navigate('/profile');
   };
 
   return (
@@ -165,17 +164,17 @@ const Navbar = () => {
               
               <div className="pt-4 border-t border-white/10">
                 {isAuthenticated ? (
-                  <div className="flex items-center justify-between">
+                  <div className="space-y-4">
                     <button 
                       onClick={handleProfileClick}
-                      className="flex items-center text-sm font-medium text-white/80 hover:text-white transition-colors sf-pro-text"
+                      className="w-full flex items-center text-sm font-medium text-white/80 hover:text-white transition-colors sf-pro-text"
                     >
                       <User className="w-5 h-5 mr-3" />
                       <span>Profile</span>
                     </button>
                     <button 
                       onClick={() => logout()} 
-                      className="flex items-center text-sm font-medium text-red-400 hover:text-red-300 transition-colors sf-pro-text"
+                      className="w-full flex items-center text-sm font-medium text-red-400 hover:text-red-300 transition-colors sf-pro-text"
                     >
                       <LogOut className="w-5 h-5 mr-3" />
                       <span>Sign Out</span>

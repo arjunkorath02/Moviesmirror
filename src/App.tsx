@@ -9,6 +9,7 @@ import PrivateRoute from './components/auth/PrivateRoute';
 const HomePage = lazy(() => import('./pages/HomePage'));
 const LoginPage = lazy(() => import('./pages/LoginPage'));
 const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const ProfilePage = lazy(() => import('./pages/ProfilePage'));
 const MoviePage = lazy(() => import('./pages/MoviePage'));
 const TVShowPage = lazy(() => import('./pages/TVShowPage'));
 const SearchPage = lazy(() => import('./pages/SearchPage'));
@@ -32,6 +33,14 @@ function App() {
               <Route path="movie/:id" element={<MoviePage />} />
               <Route path="tv/:id" element={<TVShowPage />} />
               <Route path="search" element={<SearchPage />} />
+              <Route 
+                path="profile" 
+                element={
+                  <PrivateRoute>
+                    <ProfilePage />
+                  </PrivateRoute>
+                } 
+              />
               <Route path="404" element={<NotFoundPage />} />
               <Route path="*" element={<Navigate to="/404" replace />} />
             </Route>
