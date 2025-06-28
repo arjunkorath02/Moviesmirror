@@ -1,6 +1,6 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
 import { User, AuthState } from '../types';
-import { supabase } from '../lib/Supabase';
+import { supabase } from '../Lib/Supabase';
 
 const defaultState: AuthState = {
   user: null,
