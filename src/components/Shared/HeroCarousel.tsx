@@ -6,10 +6,7 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Star, 
-  Calendar,
-  Clock,
-  Volume2,
-  VolumeX
+  Calendar
 } from 'lucide-react';
 import { MediaItem } from '../../types';
 import { getImagePath } from '../../api/tmdbApi';
@@ -28,7 +25,6 @@ const HeroCarousel = ({
 }: HeroCarouselProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(autoPlay);
-  const [isMuted, setIsMuted] = useState(true);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const [isHovered, setIsHovered] = useState(false);
 
@@ -242,19 +238,6 @@ const HeroCarousel = ({
               <Info className="w-6 h-6 mr-3" />
               <span className="sf-pro-text font-semibold text-white">More Info</span>
             </Link>
-
-            {/* Audio Control */}
-            <button
-              onClick={() => setIsMuted(!isMuted)}
-              className="liquid-glass-strong rounded-full p-4 apple-hover"
-              title={isMuted ? 'Unmute' : 'Mute'}
-            >
-              {isMuted ? (
-                <VolumeX className="w-6 h-6 text-white" />
-              ) : (
-                <Volume2 className="w-6 h-6 text-white" />
-              )}
-            </button>
           </motion.div>
         </motion.div>
       </div>
@@ -291,26 +274,6 @@ const HeroCarousel = ({
             </button>
           ))}
         </div>
-      </div>
-
-      {/* Playback Controls */}
-      <div className="absolute bottom-8 right-8 z-20">
-        <motion.button
-          onClick={() => setIsPlaying(!isPlaying)}
-          className="liquid-glass-strong rounded-full p-3 apple-hover"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          title={isPlaying ? 'Pause Auto-play' : 'Resume Auto-play'}
-        >
-          {isPlaying ? (
-            <div className="w-4 h-4 flex space-x-1">
-              <div className="w-1.5 h-4 bg-white rounded-sm" />
-              <div className="w-1.5 h-4 bg-white rounded-sm" />
-            </div>
-          ) : (
-            <Play className="w-4 h-4 text-white fill-white ml-0.5" />
-          )}
-        </motion.button>
       </div>
 
       {/* Age Rating Badge */}
